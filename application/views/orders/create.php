@@ -1,16 +1,20 @@
 <?php
-$this->db->select('firstname');
-$this->db->select('lastname');
-$this->db->from('users');
+$this->db->from('users'); //ดึงข้อมูลจากตาราง users
 $query = $this->db->get();
 
-$options = ''; // Variable to store the generated <option> elements
-
+$options = ''; // Variable to store the generated <option> elements?
 
 foreach ($query->result() as $row) {
   $pickername = $row->firstname . " " . $row->lastname;
+
+  // Skip the option with id=1
+  if ($row->id == 1) {
+    continue;
+  }
+
   $options .= "<option value='" . $pickername . "'>" . $pickername . "</option>";
 }
+
 
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -68,19 +72,20 @@ foreach ($query->result() as $row) {
               <div class="col-md-7 col-xs-12 pull pull-left">
 
                 <div class="form-group">
-                  <label for="gross_amount" class="col-sm-3 control-label" style="text-align:left;">ชื่อ-สกุล ผู้เบิก</label>
+                  <label for="gross_amount" class="col-sm-3 control-label" style="text-align:left;">ผู้เบิก</label>
                   <div class="col-sm-7">
-                    <select id="customer_name" name="customer_name" class="form-control">
+                    <select id="customer_name" name="customer_name" class="form-control" required>
+                      <option value=''></option>
                       <?= $options ?>
                     </select>
-                    <!-- <input type="text" class="form-control" id="customer_name" name="customer_name" value="<?= $pickername ?>" /> -->
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label for="gross_amount" class="col-sm-3 control-label" style="text-align:left;">ประเภทการเบิก</label>
                   <div class="col-sm-7">
-                    <select id="customer_address" name="customer_address" class="form-control">
+                    <select id="customer_address" name="customer_address" class="form-control" required>
+                      <!-- <option value=''></option> -->
                       <option value="งานซ่อม">งานซ่อม</option>
                       <option value="งานโครงการ">งานโครงการ</option>
                     </select>
@@ -122,11 +127,12 @@ foreach ($query->result() as $row) {
                       </select>
                     </td>
                     <td><input type="text" name="qty[]" id="qty_1" class="form-control" required onkeyup="getTotal(1)"></td>
+                    
                     <td>
-
                       <input type="text" name="rate[]" id="rate_1" class="form-control" disabled autocomplete="off">
                       <input type="hidden" name="rate_value[]" id="rate_value_1" class="form-control" autocomplete="off">
                     </td>
+
                     <td>
                       <input type="text" name="amount[]" id="amount_1" class="form-control" disabled autocomplete="off">
                       <input type="hidden" name="amount_value[]" id="amount_value_1" class="form-control" autocomplete="off">
@@ -186,7 +192,7 @@ foreach ($query->result() as $row) {
                     <select type="text" class="form-control" id="paid_status" name="paid_status">
                       <!-- <option value="1">อนุมัติ</option> -->
                       <option value="2">รอตรวจสอบ</option>
-                      <option value="1">ตรวจสอบแล้ว</option>
+                      <option value="1">อนุมัติ</option>
                     </select>
                   </div>
                 </div>

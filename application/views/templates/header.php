@@ -59,9 +59,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@1,600&display=swap" rel="stylesheet">
     <style>
     *,h1,h2,h3,h4,h5 {
-        /* font-family: 'Chakra Petch', sans-serif */
+        font-family: 'Chakra Petch', sans-serif
         /* font-family: 'Sriracha', cursive; */
-        font-family: 'Bai Jamjuree', sans-serif;
+        /* font-family: 'Bai Jamjuree', sans-serif; */
     }
     </style>
 
@@ -126,5 +126,5 @@
 
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-purple sidebar-mini">
     <div class="wrapper">
