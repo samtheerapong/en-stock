@@ -1,0 +1,6 @@
+user
+User: admin@admin.com
+Password: password
+
+User: engineer@nfc.com
+Password: engineer
