@@ -1,3 +1,18 @@
+<?php
+$this->db->select('firstname');
+$this->db->select('lastname');
+$this->db->from('users');
+$query = $this->db->get();
+
+$options = ''; // Variable to store the generated <option> elements
+
+
+foreach ($query->result() as $row) {
+  $pickername = $row->firstname . " " . $row->lastname;
+  $options .= "<option value='" . $pickername . "'>" . $pickername . "</option>";
+}
+
+?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -55,12 +70,15 @@
                 <div class="form-group">
                   <label for="gross_amount" class="col-sm-3 control-label" style="text-align:left;">ชื่อ-สกุล ผู้เบิก</label>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="" autocomplete="off" />
+                    <select id="customer_name" name="customer_name" class="form-control">
+                      <?= $options ?>
+                    </select>
+                    <!-- <input type="text" class="form-control" id="customer_name" name="customer_name" value="<?= $pickername ?>" /> -->
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="gross_amount" class="col-sm-3 control-label" style="text-align:left;">วัตถุประสงค์</label>
+                  <label for="gross_amount" class="col-sm-3 control-label" style="text-align:left;">ประเภทการเบิก</label>
                   <div class="col-sm-7">
                     <select id="customer_address" name="customer_address" class="form-control">
                       <option value="งานซ่อม">งานซ่อม</option>
@@ -71,7 +89,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="gross_amount" class="col-sm-3 control-label" style="text-align:left;">เบอร์ติดต่อ</label>
+                  <label for="gross_amount" class="col-sm-3 control-label" style="text-align:left;">วัตถุประสงค์</label>
                   <div class="col-sm-7">
                     <input type="text" class="form-control" id="customer_phone" name="customer_phone" placeholder="" autocomplete="off">
                   </div>
@@ -167,8 +185,8 @@
                   <div class="col-sm-5">
                     <select type="text" class="form-control" id="paid_status" name="paid_status">
                       <!-- <option value="1">อนุมัติ</option> -->
-                      <option value="1">อนุมัติ</option>
-                      <option value="2">รออนุมัติ</option>
+                      <option value="2">รอตรวจสอบ</option>
+                      <option value="1">ตรวจสอบแล้ว</option>
                     </select>
                   </div>
                 </div>
