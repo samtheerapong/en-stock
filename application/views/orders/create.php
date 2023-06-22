@@ -14,8 +14,6 @@ foreach ($query->result() as $row) {
 
   $options .= "<option value='" . $pickername . "'>" . $pickername . "</option>";
 }
-
-
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -85,11 +83,9 @@ foreach ($query->result() as $row) {
                   <label for="gross_amount" class="col-sm-3 control-label" style="text-align:left;">ประเภทการเบิก</label>
                   <div class="col-sm-7">
                     <select id="customer_address" name="customer_address" class="form-control" required>
-                      <!-- <option value=''></option> -->
                       <option value="งานซ่อม">งานซ่อม</option>
                       <option value="งานโครงการ">งานโครงการ</option>
                     </select>
-                    <!-- <input type="text" class="form-control" id="customer_address" name="customer_address" placeholder="" autocomplete="off"> -->
                   </div>
                 </div>
 
@@ -103,7 +99,7 @@ foreach ($query->result() as $row) {
 
 
               <br /> <br />
-              <table class="table table-bordered" id="product_info_table">
+              <table class="table table-bordered table-wrap" id="product_info_table">
                 <thead>
                   <tr>
                     <th style="width:50%">รายการอะไหล่</th>
@@ -121,7 +117,6 @@ foreach ($query->result() as $row) {
                       <select class="form-control select_group product" data-row-id="row_1" id="product_1" name="product[]" style="width:100%;" onchange="getProductData(1)" required>
                         <option value=""></option>
                         <?php foreach ($products as $k => $v) : ?>
-                          <!-- <option value="<?php echo $v['id'] ?>"><?php echo $v['name'] . " (คงเหลือ " . $v['qty'] . ")" ?></option> -->
                           <option value="<?php echo $v['id'] ?>"><?php echo $v['sku'] . " " . $v['name'] . " (คงเหลือ " . $v['qty'] . ")" ?></option>
                         <?php endforeach ?>
                       </select>

@@ -13,11 +13,18 @@
       <span class="sr-only">Toggle navigation</span>
     </a>
 
-    <div class="navbar-menu">
+    <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
         <li class="nav-item">
           <a href="<?php echo base_url('orders/create') ?>" class="nav-link">
+          <i class="fa fa-cube"></i>
             <span class="link-title">เบิกอะไหล่</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="<?php echo base_url('orders') ?>" class="nav-link">
+          <i class="fa fa-pencil"></i>
+            <span class="link-title">จัดการใบเบิก</span>
           </a>
         </li>
       </ul>
