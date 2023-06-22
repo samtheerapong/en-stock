@@ -104,7 +104,7 @@ foreach ($query->result() as $row) {
                   <tr>
                     <th style="width:50%">รายการอะไหล่</th>
                     <th style="width:10%">จำนวน</th>
-                    <!-- <th style="width:10%">คงเหลือในคลัง</th> -->
+                    <th style="width:10%">หน่วย</th>
                     <th style="width:10%">ราคาต่อหน่วย</th>
                     <th style="width:20%">ราคารวม</th>
                     <th style="width:10%"><button type="button" id="add_row" class="btn btn-default"><i class="fa fa-plus"></i></button></th>
@@ -117,12 +117,15 @@ foreach ($query->result() as $row) {
                       <select class="form-control select_group product" data-row-id="row_1" id="product_1" name="product[]" style="width:100%;" onchange="getProductData(1)" required>
                         <option value=""></option>
                         <?php foreach ($products as $k => $v) : ?>
-                          <option value="<?php echo $v['id'] ?>"><?php echo $v['sku'] . " " . $v['name'] . " (คงเหลือ " . $v['qty'] . ")" ?></option>
+                          <option value="<?php echo $v['id'] ?>"><?php echo $v['sku'] . " " . $v['name'] . " (คงเหลือ " . $v['qty'] . " " . $v['unit'] . ")" ?></option>
                         <?php endforeach ?>
                       </select>
                     </td>
                     <td><input type="text" name="qty[]" id="qty_1" class="form-control" required onkeyup="getTotal(1)"></td>
-                    
+                    <td>
+                      <input type="text" class="form-control" id="unit_1" name="unit[]" placeholder="" autocomplete="off" disabled/>
+                      <!-- <input type="text" name="unit[]" id="unit_1" class="form-control" disabled autocomplete="off"> -->
+                    </td>
                     <td>
                       <input type="text" name="rate[]" id="rate_1" class="form-control" disabled autocomplete="off">
                       <input type="hidden" name="rate_value[]" id="rate_value_1" class="form-control" autocomplete="off">
@@ -251,12 +254,15 @@ foreach ($query->result() as $row) {
             '<option value=""></option>';
           $.each(response, function(index, value) {
             // html += '<option value="'+value.id+'">'+value.name+" (คงเหลือ "+value.qty+")"+'</option>';             
-            html += '<option value="' + value.id + '">' + value.sku + value.name + " (คงเหลือ " + value.qty + ")" + '</option>';
+            html += '<option value="' + value.id + '">' + value.sku + value.name + " (คงเหลือ " + value.qty + " " + value.unit + ")" + '</option>';
           });
 
           html += '</select>' +
             '</td>' +
             '<td><input type="number" name="qty[]" id="qty_' + row_id + '" class="form-control" onkeyup="getTotal(' + row_id + ')"></td>' +
+            
+            '<td><input type="text" name="unit[]" id="unit_' + row_id + '" class="form-control" disabled><input type="hidden" name="unit[]" id="unit_' + row_id + '" class="form-control"></td>' +
+            
             '<td><input type="text" name="rate[]" id="rate_' + row_id + '" class="form-control" disabled><input type="hidden" name="rate_value[]" id="rate_value_' + row_id + '" class="form-control"></td>' +
             '<td><input type="text" name="amount[]" id="amount_' + row_id + '" class="form-control" disabled><input type="hidden" name="amount_value[]" id="amount_value_' + row_id + '" class="form-control"></td>' +
             '<td><button type="button" class="btn btn-default" onclick="removeRow(\'' + row_id + '\')"><i class="fa fa-close"></i></button></td>' +
@@ -300,6 +306,7 @@ foreach ($query->result() as $row) {
       $("#rate_value_" + row_id).val("");
 
       $("#qty_" + row_id).val("");
+      $("#unit_" + row_id).val("");
 
       $("#amount_" + row_id).val("");
       $("#amount_value_" + row_id).val("");
@@ -319,6 +326,9 @@ foreach ($query->result() as $row) {
           $("#rate_value_" + row_id).val(response.price);
 
           $("#qty_" + row_id).val(1);
+
+          $("#unit_" + row_id).val(response.unit);
+          
           $("#qty_value_" + row_id).val(1);
 
           var total = Number(response.price) * 1;

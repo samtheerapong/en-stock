@@ -76,6 +76,7 @@ class Products extends Admin_Controller
 				$value['name'],
 				$value['price'],
                 $value['qty'] . '  ' . $qty_status,
+                $value['unit'],
                 $store_data['name'],
 				$availability,
 				$buttons
@@ -113,6 +114,7 @@ class Products extends Admin_Controller
         		'sku' => $this->input->post('sku'),
         		'price' => $this->input->post('price'),
         		'qty' => $this->input->post('qty'),
+        		'unit' => $this->input->post('unit'),
         		'image' => $upload_image,
         		'description' => $this->input->post('description'),
         		'attribute_value_id' => json_encode($this->input->post('attributes_value_id')),
@@ -207,6 +209,7 @@ class Products extends Admin_Controller
         $this->form_validation->set_rules('sku', 'SKU', 'trim|required');
         $this->form_validation->set_rules('price', 'Price', 'trim|required');
         $this->form_validation->set_rules('qty', 'Qty', 'trim|required');
+        $this->form_validation->set_rules('unit', 'Unit', 'trim|required');
         $this->form_validation->set_rules('store', 'Store', 'trim|required');
         $this->form_validation->set_rules('availability', 'Availability', 'trim|required');
 

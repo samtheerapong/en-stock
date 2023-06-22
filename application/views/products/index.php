@@ -53,6 +53,7 @@
                 <th>ชื่อสินค้า / อะไหล่</th>
                 <th>ราคาต่อหน่วย</th>
                 <th>จำนวน</th>
+                <th>หน่วย</th>
                 <th>เก็บที่คลัง</th>
                 <th>สถานะ</th>
                 <?php if(in_array('updateProduct', $user_permission) || in_array('deleteProduct', $user_permission)): ?>
