@@ -253,7 +253,6 @@ foreach ($query->result() as $row) {
             '<select class="form-control select_group product" data-row-id="' + row_id + '" id="product_' + row_id + '" name="product[]" style="width:100%;" onchange="getProductData(' + row_id + ')">' +
             '<option value=""></option>';
           $.each(response, function(index, value) {
-            // html += '<option value="'+value.id+'">'+value.name+" (คงเหลือ "+value.qty+")"+'</option>';             
             html += '<option value="' + value.id + '">' + value.sku + value.name + " (คงเหลือ " + value.qty + " " + value.unit + ")" + '</option>';
           });
 
@@ -328,7 +327,7 @@ foreach ($query->result() as $row) {
           $("#qty_" + row_id).val(1);
 
           $("#unit_" + row_id).val(response.unit);
-          
+
           $("#qty_value_" + row_id).val(1);
 
           var total = Number(response.price) * 1;
