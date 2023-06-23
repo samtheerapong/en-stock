@@ -37,7 +37,7 @@
 
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Edit Product</h3>
+            <h3 class="box-title">ปรับปรุง อะไหล่</h3>
           </div>
           <!-- /.box-header -->
           <form role="form" action="<?php base_url('users/update') ?>" method="post" enctype="multipart/form-data">
@@ -46,12 +46,12 @@
                 <?php echo validation_errors(); ?>
 
                 <div class="form-group">
-                  <label>Image Preview: </label>
+                  <label>รูปภาพ: </label>
                   <img src="<?php echo base_url() . $product_data['image'] ?>" width="150" height="150" class="img-circle">
                 </div>
 
                 <div class="form-group">
-                  <label for="product_image">Update Image</label>
+                  <label for="product_image">รูป</label>
                   <div class="kv-avatar">
                       <div class="file-loading">
                           <input id="product_image" name="product_image" type="file">
@@ -60,27 +60,32 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="product_name">Product name</label>
+                  <label for="product_name">ชื่ออะไหล่</label>
                   <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Enter product name" value="<?php echo $product_data['name']; ?>"  autocomplete="off"/>
                 </div>
 
                 <div class="form-group">
-                  <label for="sku">SKU</label>
+                  <label for="sku">รหัส</label>
                   <input type="text" class="form-control" id="sku" name="sku" placeholder="Enter sku" value="<?php echo $product_data['sku']; ?>" autocomplete="off" />
                 </div>
 
                 <div class="form-group">
-                  <label for="price">Price</label>
+                  <label for="price">ราคา</label>
                   <input type="text" class="form-control" id="price" name="price" placeholder="Enter price" value="<?php echo $product_data['price']; ?>" autocomplete="off" />
                 </div>
 
                 <div class="form-group">
-                  <label for="qty">Qty</label>
+                  <label for="qty">จำนวน</label>
                   <input type="text" class="form-control" id="qty" name="qty" placeholder="Enter Qty" value="<?php echo $product_data['qty']; ?>" autocomplete="off" />
                 </div>
 
                 <div class="form-group">
-                  <label for="description">Description</label>
+                  <label for="qty">หน่วย</label>
+                  <input type="text" class="form-control" id="unit" name="unit" placeholder="Enter unit" value="<?php echo $product_data['unit']; ?>" autocomplete="off" />
+                </div>
+
+                <div class="form-group">
+                  <label for="description">รายละเอียด</label>
                   <textarea type="text" class="form-control" id="description" name="description" placeholder="Enter 
                   description" autocomplete="off">
                     <?php echo $product_data['description']; ?>
@@ -102,17 +107,17 @@
                 <?php endif; ?>
 
                 <div class="form-group">
-                  <label for="brands">Brands</label>
+                  <label for="brands">ลักษณะ</label>
                   <?php $brand_data = json_decode($product_data['brand_id']); ?>
                   <select class="form-control select_group" id="brands" name="brands[]" multiple="multiple">
                     <?php foreach ($brands as $k => $v): ?>
-                      <option value="<?php echo $v['id'] ?>" <?php if(in_array($v['id'], $brand_data)) { echo 'selected="selected"'; } ?>><?php echo $v['name'] ?></option>
+                      <option value="<?php echo $v['id'] ?>" <?php if(in_array($v['id'], $brand_data)) { echo 'selected="selected" style="color: black;"'; } ?>><?php echo $v['name'] ?></option>
                     <?php endforeach ?>
                   </select>
                 </div>
 
                 <div class="form-group">
-                  <label for="category">Category</label>
+                  <label for="category">ประเภท</label>
                   <?php $category_data = json_decode($product_data['category_id']); ?>
                   <select class="form-control select_group" id="category" name="category[]" multiple="multiple">
                     <?php foreach ($category as $k => $v): ?>
@@ -122,7 +127,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="store">Store</label>
+                  <label for="store">คลังที่เก็บ</label>
                   <select class="form-control select_group" id="store" name="store">
                     <?php foreach ($stores as $k => $v): ?>
                       <option value="<?php echo $v['id'] ?>" <?php if($product_data['store_id'] == $v['id']) { echo "selected='selected'"; } ?> ><?php echo $v['name'] ?></option>
@@ -131,10 +136,10 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="store">Availability</label>
+                  <label for="store">การใช้งาน</label>
                   <select class="form-control" id="availability" name="availability">
-                    <option value="1" <?php if($product_data['availability'] == 1) { echo "selected='selected'"; } ?>>Yes</option>
-                    <option value="2" <?php if($product_data['availability'] != 1) { echo "selected='selected'"; } ?>>No</option>
+                    <option value="1" <?php if($product_data['availability'] == 1) { echo "selected='selected'"; } ?>>ใช้งาน</option>
+                    <option value="2" <?php if($product_data['availability'] != 1) { echo "selected='selected'"; } ?>>ไม่ใช้งาน</option>
                   </select>
                 </div>
 
@@ -144,8 +149,8 @@
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Save Changes</button>
-                <a href="<?php echo base_url('users/') ?>" class="btn btn-warning">Back</a>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> บันทึก</button>
+                <a href="<?php echo base_url('users/') ?>" class="btn btn-warning"> <i class="fa fa-mail-reply"></i> ย้อนกลับ</a>
               </div>
             </form>
           <!-- /.box-body -->

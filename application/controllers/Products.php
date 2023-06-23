@@ -62,11 +62,11 @@ class Products extends Admin_Controller
             // โชว์จำนวน Stock ในคลัง
             $qty_status = '';
             if($value['qty'] <= 0) {
-                $qty_status = ' <span class="label label-danger"> Empty !</span>';
+                $qty_status = ' <span class="label label-danger"> หมด</span>';
             } else if($value['qty'] <= 5) {
-                $qty_status = ' <span class="label label-warning"> Low !</span>';
+                $qty_status = ' <span class="label label-warning"> เหลือน้อย</span>';
             } else if($value['qty'] > 5) {
-                $qty_status = ' <span class="label label-success"> Ready</span>';
+                $qty_status = ' <span class="label label-success"> พร้อมเบิก</span>';
             }
 
 
@@ -221,6 +221,7 @@ class Products extends Admin_Controller
                 'sku' => $this->input->post('sku'),
                 'price' => $this->input->post('price'),
                 'qty' => $this->input->post('qty'),
+                'unit' => $this->input->post('unit'),
                 'description' => $this->input->post('description'),
                 'attribute_value_id' => json_encode($this->input->post('attributes_value_id')),
                 'brand_id' => json_encode($this->input->post('brands')),
