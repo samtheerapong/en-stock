@@ -60,7 +60,7 @@ class Model_orders extends CI_Model
 		$this->load->model('model_products');
 
 		$count_product = count($this->input->post('product'));
-    	for($x = 0; $x < $count_product; $x++) {
+    	for($x = 0; $x < $cozunt_product; $x++) {
     		$items = array(
     			'order_id' => $order_id,
     			'product_id' => $this->input->post('product')[$x],
