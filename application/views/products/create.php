@@ -1,5 +1,3 @@
-
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -16,127 +14,137 @@
 
   <!-- Main content -->
   <section class="content">
-    <!-- Small boxes (Stat box) -->
-    <div class="row">
-      <div class="col-md-12 col-xs-12">
+
+    <div class="container-fluid">
+      <div class="row">
 
         <div id="messages"></div>
 
-        <?php if($this->session->flashdata('success')): ?>
+        <?php if ($this->session->flashdata('success')) : ?>
           <div class="alert alert-success alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <?php echo $this->session->flashdata('success'); ?>
           </div>
-        <?php elseif($this->session->flashdata('error')): ?>
+        <?php elseif ($this->session->flashdata('error')) : ?>
           <div class="alert alert-error alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <?php echo $this->session->flashdata('error'); ?>
           </div>
         <?php endif; ?>
 
+        <a href="<?php echo base_url('products/') ?>" class="btn btn-primary"> <i class="fa fa-mail-reply"></i> ย้อนกลับ</a>
+        <br />
+        <br />
 
-        <div class="box">
-          <div class="box-header">
-            <h3 class="box-title">เพิ่มอะไหล่</h3>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">เพิ่มอะไหล่</h3>
           </div>
           <!-- /.box-header -->
           <form role="form" action="<?php base_url('users/create') ?>" method="post" enctype="multipart/form-data">
-              <div class="box-body">
+            <div class="panel-body">
 
-                <?php echo validation_errors(); ?>
+              <?php echo validation_errors(); ?>
 
-                <div class="form-group">
+              <div class="form-group">
 
-                  <label for="product_image">รูปภาพ</label>
-                  <div class="kv-avatar">
-                      <div class="file-loading">
-                          <input id="product_image" name="product_image" type="file">
-                      </div>
+                <label for="product_image">รูปภาพ</label>
+                <div class="kv-avatar">
+                  <div class="file-loading">
+                    <input id="product_image" name="product_image" type="file">
                   </div>
                 </div>
+              </div>
 
-                <div class="form-group">
-                  <label for="product_name">รายการอะไหล่</label>
-                  <input type="text" class="form-control" id="product_name" name="product_name" placeholder="" autocomplete="off"/>
-                </div>
+              <div class="form-group">
+                <label for="product_name">รายการอะไหล่</label>
+                <input type="text" class="form-control" id="product_name" name="product_name" placeholder="" autocomplete="off" />
+              </div>
 
-                <div class="form-group">
-                  <label for="sku">รหัส</label>
-                  <input type="text" class="form-control" id="sku" name="sku" placeholder="" autocomplete="off" />
-                </div>
+              <div class="form-group">
+                <label for="sku">รหัส</label>
+                <input type="text" class="form-control" id="sku" name="sku" placeholder="" autocomplete="off" />
+              </div>
 
-                <div class="form-group">
-                  <label for="price">ราคา</label>
-                  <input type="text" class="form-control" id="price" name="price" placeholder="" autocomplete="off" />
-                </div>
+              <div class="form-group">
+                <label for="price">ราคา</label>
+                <input type="text" class="form-control" id="price" name="price" placeholder="" autocomplete="off" />
+              </div>
 
-                <div class="form-group">
-                  <label for="qty">จำนวน</label>
-                  <input type="text" class="form-control" id="qty" name="qty" placeholder="" autocomplete="off" />
-                </div>
+              <div class="form-group">
+                <label for="qty">จำนวน</label>
+                <input type="text" class="form-control" id="qty" name="qty" placeholder="" autocomplete="off" />
+              </div>
 
-                <div class="form-group">
-                  <label for="description">รายละเอียด</label>
-                  <textarea type="text" class="form-control" id="description" name="description" placeholder="" autocomplete="off">
+              <div class="form-group">
+                <label for="qty">ขั้นต่ำ</label>
+                <input type="text" class="form-control" id="minimum" name="minimum" placeholder="" autocomplete="off" />
+              </div>
+
+              <div class="form-group">
+                <label for="description">รายละเอียด</label>
+                <textarea type="text" class="form-control" id="description" name="description" placeholder="" autocomplete="off">
                   </textarea>
-                </div>
+              </div>
 
-                <?php if($attributes): ?>
-                  <?php foreach ($attributes as $k => $v): ?>
-                    <div class="form-group">
-                      <label for="groups"><?php echo $v['attribute_data']['name'] ?></label>
-                      <select class="form-control select_group" id="attributes_value_id" name="attributes_value_id[]" multiple="multiple">
-                        <?php foreach ($v['attribute_value'] as $k2 => $v2): ?>
-                          <option value="<?php echo $v2['id'] ?>"><?php echo $v2['value'] ?></option>
-                        <?php endforeach ?>
-                      </select>
-                    </div>    
+
+           
+              <?php if ($attributes) : ?>
+                <?php foreach ($attributes as $k => $v) : ?>
+                  <div class="form-group">
+                    <label for="groups"><?php echo $v['attribute_data']['name'] ?></label>
+                    <select class="form-control select_group" id="attributes_value_id" name="attributes_value_id[]" multiple="multiple">
+                      <?php foreach ($v['attribute_value'] as $k2 => $v2) : ?>
+                        <option value="<?php echo $v2['id'] ?>"><?php echo $v2['value'] ?></option>
+                      <?php endforeach ?>
+                    </select>
+                  </div>
+                <?php endforeach ?>
+              <?php endif; ?>
+
+              <div class="form-group">
+                <label for="brands">ลักษณะ</label>
+                <select class="form-control select_group" id="brands" name="brands[]" multiple="multiple">
+                  <?php foreach ($brands as $k => $v) : ?>
+                    <option value="<?php echo $v['id'] ?>"><?php echo $v['name'] ?></option>
                   <?php endforeach ?>
-                <?php endif; ?>
-
-                <div class="form-group">
-                  <label for="brands">ลักษณะ</label>
-                  <select class="form-control select_group" id="brands" name="brands[]" multiple="multiple">
-                    <?php foreach ($brands as $k => $v): ?>
-                      <option value="<?php echo $v['id'] ?>"><?php echo $v['name'] ?></option>
-                    <?php endforeach ?>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="category">ประเภท</label>
-                  <select class="form-control select_group" id="category" name="category[]" multiple="multiple">
-                    <?php foreach ($category as $k => $v): ?>
-                      <option value="<?php echo $v['id'] ?>"><?php echo $v['name'] ?></option>
-                    <?php endforeach ?>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="store">คลังเก็บ</label>
-                  <select class="form-control select_group" id="store" name="store">
-                    <?php foreach ($stores as $k => $v): ?>
-                      <option value="<?php echo $v['id'] ?>"><?php echo $v['name'] ?></option>
-                    <?php endforeach ?>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="store">การใช้งาน</label>
-                  <select class="form-control" id="availability" name="availability">
-                    <option value="1">ใช้งาน</option>
-                    <option value="2">ไม่ใช้งาน</option>
-                  </select>
-                </div>
-
+                </select>
               </div>
-              <!-- /.box-body -->
 
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary"> <i class="fa fa-save"></i> บันทึก</button>
-                <a href="<?php echo base_url('products/') ?>" class="btn btn-warning"> <i class="fa fa-mail-reply"></i> ย้อนกลับ</a>
+              <div class="form-group">
+                <label for="category">ประเภท</label>
+                <select class="form-control select_group" id="category" name="category[]" multiple="multiple">
+                  <?php foreach ($category as $k => $v) : ?>
+                    <option value="<?php echo $v['id'] ?>"><?php echo $v['name'] ?></option>
+                  <?php endforeach ?>
+                </select>
               </div>
-            </form>
+
+              <div class="form-group">
+                <label for="store">คลังเก็บ</label>
+                <select class="form-control" id="store" name="store">
+                  <?php foreach ($stores as $k => $v) : ?>
+                    <option value="<?php echo $v['id'] ?>"><?php echo $v['name'] ?></option>
+                  <?php endforeach ?>
+                </select>
+              </div>
+
+              <div class="form-group ">
+                <label for="store">การใช้งาน</label>
+                <select class="form-control" id="availability" name="availability">
+                  <option value="1">ใช้งาน</option>
+                  <option value="2">ไม่ใช้งาน</option>
+                </select>
+              </div>
+
+            </div>
+            <!-- /.panel-body -->
+
+            <div class="panel-footer">
+              <button type="submit" class="btn btn-success"> <i class="fa fa-save"></i> บันทึก</button>
+              <!-- <a href="<?php echo base_url('products/') ?>" class="btn btn-warning"> <i class="fa fa-mail-reply"></i> ย้อนกลับ</a> -->
+            </div>
+          </form>
           <!-- /.box-body -->
         </div>
         <!-- /.box -->
@@ -144,7 +152,6 @@
       <!-- col-md-12 -->
     </div>
     <!-- /.row -->
-    
 
   </section>
   <!-- /.content -->
@@ -158,27 +165,29 @@
 
     $("#mainProductNav").addClass('active');
     $("#addProductNav").addClass('active');
-    
-    var btnCust = 
-        '<button type="button" class="btn btn-secondary" title="Add picture tags" ' + 
-        'onclick="alert(\'ระบบจะสร้างแท็กอัตโนมัติ\')">' +
-        '<i class="glyphicon glyphicon-tag"></i>' +
-        '</button>'; 
+
+    var btnCust =
+      '<button type="button" class="btn btn-secondary" title="Add picture tags" ' +
+      'onclick="alert(\'ระบบจะสร้างแท็กอัตโนมัติ\')">' +
+      '<i class="glyphicon glyphicon-tag"></i>' +
+      '</button>';
     $("#product_image").fileinput({
-        overwriteInitial: true,
-        maxFileSize: 1500,
-        showClose: false,
-        showCaption: false,
-        browseLabel: '',
-        removeLabel: '',
-        browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
-        removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
-        removeTitle: 'Cancel or reset changes',
-        elErrorContainer: '#kv-avatar-errors-1',
-        msgErrorClass: 'alert alert-block alert-danger',
-        // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
-        layoutTemplates: {main2: '{preview} ' +  btnCust + ' {remove} {browse}'},
-        allowedFileExtensions: ["jpg", "png", "gif"]
+      overwriteInitial: true,
+      maxFileSize: 1500,
+      showClose: false,
+      showCaption: false,
+      browseLabel: '',
+      removeLabel: '',
+      browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+      removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+      removeTitle: 'Cancel or reset changes',
+      elErrorContainer: '#kv-avatar-errors-1',
+      msgErrorClass: 'alert alert-block alert-danger',
+      // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
+      layoutTemplates: {
+        main2: '{preview} ' + btnCust + ' {remove} {browse}'
+      },
+      allowedFileExtensions: ["jpg", "png", "gif"]
     });
 
   });

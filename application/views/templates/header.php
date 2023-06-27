@@ -126,5 +126,5 @@
 
 </head>
 
-<body class="hold-transition skin-purple sidebar-mini">
+<body class="hold-transition skin-purple sidebar-mini sidebar-collapse">
     <div class="wrapper">

@@ -325,7 +325,7 @@ class Orders extends Admin_Controller
 				$html .= '<tr>
 								<td>' . $product_data['sku'] . " " . $product_data['name'] . '</td>
 								<td>' . $v['rate'] . '</td>
-								<td>' . $v['qty'] . '</td>
+								<td>' . $v['qty'] . " " . $product_data['unit'] . '</td>
 								<td>' . $v['amount'] . '</td>
 							</tr>';
 			}
@@ -345,20 +345,14 @@ class Orders extends Admin_Controller
 			              <th style="width:50%">จำนวนเงินรวม:</th>
 			              <td>' . $order_data['gross_amount'] . '</td>
 			            </tr>';
-			if ($order_data['service_charge'] > 0) {
-				$html .= '<tr>
-											<th>Service Charge (' . $order_data['service_charge_rate'] . '%)</th>
-											<td>' . $order_data['service_charge'] . '</td>
-											</tr>';
-			}
-			if ($order_data['vat_charge'] > 0) {
-				$html .= '<tr>
-											<th>Vat Charge (' . $order_data['vat_charge_rate'] . '%)</th>
-											<td>' . $order_data['vat_charge'] . '</td>
-											</tr>';
-			}
+							if ($order_data['service_charge'] > 0) {
+								$html .= '<tr><th>Service Charge (' . $order_data['service_charge_rate'] . '%)</th><td>' . $order_data['service_charge'] . '</td></tr>';
+							}
+							if ($order_data['vat_charge'] > 0) {
+								$html .= '<tr><th>Vat Charge (' . $order_data['vat_charge_rate'] . '%)</th><td>' . $order_data['vat_charge'] . '</td></tr>';
+							}
 
-			$html .= ' 
+							$html .= ' 
 			            <tr>
 			              <th>จำนวนเงินรวม สุทธิ:</th>
 			              <td>' . $order_data['net_amount'] . '</td>
@@ -376,7 +370,7 @@ class Orders extends Admin_Controller
 				
 			  </section>
 			  <div class="row">
-				<div class="col-xs-10 pull pull-right">
+				<div class="col-xs-11 pull pull-right">
 					<div class="table table-borderless">
 						<table class="table table-borderless">
 							<thead>
@@ -395,7 +389,6 @@ class Orders extends Admin_Controller
 							</tbody>
 						</table>
 					</div>
-			  		<!-- /.content -->
 				</div>
 			</div>
 		</body>

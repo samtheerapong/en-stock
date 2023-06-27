@@ -15,8 +15,8 @@ foreach ($query->result() as $row) {
   $options .= "<option value='" . $pickername . "'>" . $pickername . "</option>";
 }
 ?>
-<!-- <style>
-  @media (max-width: auto) {
+<style>
+  @media (max-width: 767px) {
 
     #product_info_table th:nth-child(2),
     #product_info_table td:nth-child(2),
@@ -30,7 +30,7 @@ foreach ($query->result() as $row) {
       min-width: 100px;
     }
   }
-</style> -->
+</style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -48,8 +48,9 @@ foreach ($query->result() as $row) {
   <!-- Main content -->
   <section class="content">
     <!-- Small boxes (Stat box) -->
-    <div class="container-fluid">
-      <div class="row">
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <!-- <div class="col-md-12 col-xs-12"> -->
 
         <div id="messages"></div>
 
@@ -66,16 +67,18 @@ foreach ($query->result() as $row) {
         <?php endif; ?>
 
 
-        <a href="<?php echo base_url('orders/') ?>" class="btn btn-primary"> <i class="fa fa-mail-reply"></i> ย้อนกลับ</a>
-        <br /> <br />
-
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">แบบฟอร์มการเบิกอะไหล่</h3>
+        <div class="box">
+          <div class="box-header">
+            <h3 class="box-title">แบบฟอร์มการเบิกอะไหล่</h3>
           </div>
+          <!-- /.box-header -->
           <form role="form" action="<?php base_url('orders/create') ?>" method="post" class="form-horizontal">
-            <div class="panel-body">
+
+
+            <div class="box-body">
+
               <?php echo validation_errors(); ?>
+
               <div class="form-group">
                 <label for="gross_amount" class="col-sm-12 control-label">วันที่: <?php echo date('Y-m-d') ?></label>
               </div>
@@ -121,6 +124,7 @@ foreach ($query->result() as $row) {
                         <th style="width:20px"><button type="button" id="add_row" class="btn btn-default"><i class="fa fa-plus"></i></button></th>
                         <th>รายการอะไหล่</th>
                         <th>จำนวน</th>
+                        <th>หน่วย</th>
                         <th>ราคาต่อหน่วย</th>
                         <th>ราคารวม</th>
                       </tr>
@@ -137,17 +141,18 @@ foreach ($query->result() as $row) {
                             <?php endforeach ?>
                           </select>
                         </td>
-                        <td><input type="text" name="qty[]" id="qty_1" class="form-control text-right" required onkeyup="getTotal(1)"></td>
-                        <!-- <td>
-                          <input type="text" class="form-control" id="unit_1" name="unit[]" placeholder="" autocomplete="off" disabled />
-                        </td> -->
+                        <td><input type="number" name="qty[]" id="qty_1" class="form-control" required onkeyup="getTotal(1)"></td>
                         <td>
-                          <input type="text" name="rate[]" id="rate_1" class="form-control text-right" disabled autocomplete="off">
+                          <input type="text" class="form-control" id="unit_1" name="unit[]" placeholder="" autocomplete="off" disabled />
+                          <!-- <input type="text" name="unit[]" id="unit_1" class="form-control" disabled autocomplete="off"> -->
+                        </td>
+                        <td>
+                          <input type="text" name="rate[]" id="rate_1" class="form-control" disabled autocomplete="off">
                           <input type="hidden" name="rate_value[]" id="rate_value_1" class="form-control" autocomplete="off">
                         </td>
 
                         <td>
-                          <input type="text" name="amount[]" id="amount_1" class="form-control text-right" disabled autocomplete="off">
+                          <input type="text" name="amount[]" id="amount_1" class="form-control" disabled autocomplete="off">
                           <input type="hidden" name="amount_value[]" id="amount_value_1" class="form-control" autocomplete="off">
                         </td>
                       </tr>
@@ -209,19 +214,27 @@ foreach ($query->result() as $row) {
                 </div>
               </div>
             </div>
+            <!-- /.box-body -->
 
-            <div class="panel-footer">
+            <div class="box-footer">
               <input type="hidden" name="service_charge_rate" value="<?php echo $company_data['service_charge_value'] ?>" autocomplete="off">
               <input type="hidden" name="vat_charge_rate" value="<?php echo $company_data['vat_charge_value'] ?>" autocomplete="off">
-              <button type="submit" class="btn btn-success"> <i class="fa fa-save"></i> บันทึก</button>
-              <!-- <a href="<?php echo base_url('orders/') ?>" class="btn btn-primary"> <i class="fa fa-mail-reply"></i> ย้อนกลับ</a> -->
+              <button type="submit" class="btn btn-primary"> <i class="fa fa-save"></i> บันทึก</button>
+              <a href="<?php echo base_url('orders/') ?>" class="btn btn-warning"> <i class="fa fa-mail-reply"></i> ย้อนกลับ</a>
             </div>
           </form>
         </div>
+        <!-- /.box -->
       </div>
+      <!-- /.col-md-12 col-xs-12-->
     </div>
+    <!-- /.row -->
   </section>
+  <!-- /.content -->
 </div>
+<!-- /.content-wrapper -->
+
+
 
 <script type="text/javascript">
   var base_url = "<?php echo base_url(); ?>";
@@ -262,9 +275,12 @@ foreach ($query->result() as $row) {
 
           html += '</select>' +
             '</td>' +
-            '<td><input type="text" name="qty[]" id="qty_' + row_id + '" class="form-control text-right" onkeyup="getTotal(' + row_id + ')"></td>' +
-            '<td><input type="text" name="rate[]" id="rate_' + row_id + '" class="form-control text-right" disabled><input type="hidden" name="rate_value[]" id="rate_value_' + row_id + '"></td>' +
-            '<td><input type="text" name="amount[]" id="amount_' + row_id + '" class="form-control text-right" disabled><input type="hidden" name="amount_value[]" id="amount_value_' + row_id + '"></td>' +
+            '<td><input type="text" name="qty[]" id="qty_' + row_id + '" class="form-control" onkeyup="getTotal(' + row_id + ')"></td>' +
+
+            '<td><input type="text" name="unit[]" id="unit_' + row_id + '" class="form-control" disabled><input type="hidden" name="unit[]" id="unit_' + row_id + '" class="form-control"></td>' +
+
+            '<td><input type="text" name="rate[]" id="rate_' + row_id + '" class="form-control" disabled><input type="hidden" name="rate_value[]" id="rate_value_' + row_id + '" class="form-control"></td>' +
+            '<td><input type="text" name="amount[]" id="amount_' + row_id + '" class="form-control" disabled><input type="hidden" name="amount_value[]" id="amount_value_' + row_id + '" class="form-control"></td>' +
             '</tr>';
 
           if (count_table_tbody_tr >= 1) {

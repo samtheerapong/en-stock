@@ -17,8 +17,8 @@
   <!-- Main content -->
   <section class="content">
     <!-- Small boxes (Stat box) -->
-    <div class="row">
-      <div class="col-md-12 col-xs-12">
+    <div class="container-fluid">
+            <div class="row">
 
         <div id="messages"></div>
 
@@ -35,16 +35,16 @@
         <?php endif; ?>
 
         <?php if(in_array('createCategory', $user_permission)): ?>
-          <button class="btn btn-primary" data-toggle="modal" data-target="#addModal"><i class="fa fa-plus"></i> เพิ่มข้อมูล</button>
+          <button class="btn btn-success" data-toggle="modal" data-target="#addModal"><i class="fa fa-plus"></i> เพิ่มข้อมูล</button>
           <br /> <br />
         <?php endif; ?>
 
-        <div class="box">
-          <div class="box-header">
-            <h3 class="box-title">กลุ่มอุปกรณ์ / อะไหล่</h3>
+        <div class="panel panel-primary">
+                    <div class="panel-heading">
+            <h3 class="panel-title">กลุ่มอุปกรณ์ / อะไหล่</h3>
           </div>
-          <!-- /.box-header -->
-          <div class="box-body">
+          <!-- /.panel-header -->
+          <div class="panel-body">
             <table id="manageTable" class="table table-bordered table-striped">
               <thead>
               <tr>
@@ -58,9 +58,9 @@
 
             </table>
           </div>
-          <!-- /.box-body -->
+          <!-- /.panel-body -->
         </div>
-        <!-- /.box -->
+        <!-- /.panel -->
       </div>
       <!-- col-md-12 -->
     </div>

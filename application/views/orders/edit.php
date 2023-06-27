@@ -50,22 +50,25 @@ foreach ($query->result() as $row) {
           </div>
         <?php endif; ?>
 
+        <a href="<?php echo base_url('orders/') ?>" class="btn btn-primary"> <i class="fa fa-mail-reply"></i> ย้อนกลับ</a>
+        <br /> <br />
 
-        <div class="box">
-          <div class="box-header">
-            <h3 class="box-title">รายละเอียดข้อมูลการเบิกอะไหล่</h3>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">รายละเอียดข้อมูลการเบิกอะไหล่</h3>
           </div>
           <!-- /.box-header -->
           <form role="form" action="<?php base_url('orders/create') ?>" method="post" class="form-horizontal">
-            <div class="box-body">
+            <div class="panel-body">
 
               <?php echo validation_errors(); ?>
 
               <div class="form-group">
-                <label for="date" class="col-sm-12 control-label">Date: <?php echo date('Y-m-d') ?></label>
+                <!-- <label for="date" class="col-sm-12 control-label">วันที่: <?php echo date('Y-m-d') ?></label> -->
+                <label for="date" class="col-sm-12 control-label">วันที่: <?php echo date('d/m/Y') ?></label>
               </div>
               <div class="form-group">
-                <label for="time" class="col-sm-12 control-label">Date: <?php echo date('h:i a') ?></label>
+                <label for="time" class="col-sm-12 control-label">เวลา: <?php echo date('h:i') ?> น.</label>
               </div>
 
               <div class="col-md-7 col-xs-12 pull pull-left">
@@ -90,7 +93,7 @@ foreach ($query->result() as $row) {
                 <div class="form-group">
                   <label for="gross_amount" class="col-sm-3 control-label" style="text-align:left;">ประเภทการเบิก</label>
                   <div class="col-sm-7">
-                    <select id="customer_address" name="customer_address" class="form-control" >
+                    <select id="customer_address" name="customer_address" class="form-control">
                       <option value="<?php echo $order_data['order']['customer_address'] ?>"># <?php echo $order_data['order']['customer_address'] ?></option>
                       <option value="งานซ่อม">งานซ่อม</option>
                       <option value="งานโครงการ">งานโครงการ</option>
@@ -107,57 +110,58 @@ foreach ($query->result() as $row) {
                 </div>
               </div>
 
-
-              <br /> <br />
-              <table class="table table-bordered" id="product_info_table">
-                <thead>
-                  <tr>
-                    <th style="width:50%">รายการอะไหล่</th>
-                    <th style="width:10%">จำนวน</th>
-                    <th style="width:10%">ราคาต่อหน่วย</th>
-                    <th style="width:20%">ราคารวม</th>
-                    <th style="width:10%"><button type="button" id="add_row" class="btn btn-default"><i class="fa fa-plus"></i></button></th>
-                  </tr>
-                </thead>
-
-                <tbody>
-
-                  <?php if (isset($order_data['order_item'])) : ?>
-                    <?php $x = 1; ?>
-                    <?php foreach ($order_data['order_item'] as $key => $val) : ?>
-                      <?php //print_r($v); 
-                      ?>
-                      <tr id="row_<?php echo $x; ?>">
-                        <td>
-                          <select class="form-control select_group product" data-row-id="row_<?php echo $x; ?>" id="product_<?php echo $x; ?>" name="product[]" style="width:100%;" onchange="getProductData(<?php echo $x; ?>)" required>
-                            <option value=""></option>
-                            <?php foreach ($products as $k => $v) : ?>
-                              <option value="<?php echo $v['id'] ?>" <?php if ($val['product_id'] == $v['id']) {
-                                                                        echo "selected='selected'";
-                                                                      } ?>>
-                                <?php echo $v['sku'] . " " . $v['name'] . " (คงเหลือ " . $v['qty'] . ")" ?>
-                              </option>
-                            <?php endforeach ?>
-                          </select>
-                        </td>
-                        <td><input type="text" name="qty[]" id="qty_<?php echo $x; ?>" class="form-control" required onkeyup="getTotal(<?php echo $x; ?>)" value="<?php echo $val['qty'] ?>" autocomplete="off"></td>
-                        <td>
-                          <input type="text" name="rate[]" id="rate_<?php echo $x; ?>" class="form-control" disabled value="<?php echo $val['rate'] ?>" autocomplete="off">
-                          <input type="hidden" name="rate_value[]" id="rate_value_<?php echo $x; ?>" class="form-control" value="<?php echo $val['rate'] ?>" autocomplete="off">
-                        </td>
-                        <td>
-                          <input type="text" name="amount[]" id="amount_<?php echo $x; ?>" class="form-control" disabled value="<?php echo $val['amount'] ?>" autocomplete="off">
-                          <input type="hidden" name="amount_value[]" id="amount_value_<?php echo $x; ?>" class="form-control" value="<?php echo $val['amount'] ?>" autocomplete="off">
-                        </td>
-                        <td><button type="button" class="btn btn-default" onclick="removeRow('<?php echo $x; ?>')"><i class="fa fa-close"></i></button></td>
+              <div class="col-md-12 col-xs-12">
+                <div class="table-responsive">
+                  <table class="table table-bordered" id="product_info_table">
+                    <thead>
+                      <tr>
+                        <th><button type="button" id="add_row" class="btn btn-default"><i class="fa fa-plus"></i></button></th>
+                        <th>รายการอะไหล่</th>
+                        <th>จำนวน</th>
+                        <th>ราคาต่อหน่วย</th>
+                        <th>ราคารวม</th>
                       </tr>
-                      <?php $x++; ?>
-                    <?php endforeach; ?>
-                  <?php endif; ?>
-                </tbody>
-              </table>
+                    </thead>
 
-              <br /> <br />
+                    <tbody>
+
+                      <?php if (isset($order_data['order_item'])) : ?>
+                        <?php $x = 1; ?>
+                        <?php foreach ($order_data['order_item'] as $key => $val) : ?>
+                          <?php //print_r($v); 
+                          ?>
+                          <tr id="row_<?php echo $x; ?>">
+                            <td><button type="button" class="btn btn-default" onclick="removeRow('<?php echo $x; ?>')"><i class="fa fa-close"></i></button></td>
+                            <td>
+                              <select class="form-control select_group product" data-row-id="row_<?php echo $x; ?>" id="product_<?php echo $x; ?>" name="product[]" style="width:100%;" onchange="getProductData(<?php echo $x; ?>)" required>
+                                <option value=""></option>
+                                <?php foreach ($products as $k => $v) : ?>
+                                  <option value="<?php echo $v['id'] ?>" <?php if ($val['product_id'] == $v['id']) {
+                                                                            echo "selected='selected'";
+                                                                          } ?>>
+                                    <?php echo $v['sku'] . " " . $v['name'] . " (คงเหลือ " . $v['qty'] . " " . $v['unit'] . ")" ?>
+                                  </option>
+                                <?php endforeach ?>
+                              </select>
+                            </td>
+                            <td><input type="text" name="qty[]" id="qty_<?php echo $x; ?>" class="form-control text-right" required onkeyup="getTotal(<?php echo $x; ?>)" value="<?php echo $val['qty'] ?>" autocomplete="off"></td>
+                            <td>
+                              <input type="text" name="rate[]" id="rate_<?php echo $x; ?>" class="form-control text-right" disabled value="<?php echo $val['rate'] ?>" autocomplete="off">
+                              <input type="hidden" name="rate_value[]" id="rate_value_<?php echo $x; ?>" class="form-control" value="<?php echo $val['rate'] ?>" autocomplete="off">
+                            </td>
+                            <td>
+                              <input type="text" name="amount[]" id="amount_<?php echo $x; ?>" class="form-control text-right" disabled value="<?php echo $val['amount'] ?>" autocomplete="off">
+                              <input type="hidden" name="amount_value[]" id="amount_value_<?php echo $x; ?>" class="form-control" value="<?php echo $val['amount'] ?>" autocomplete="off">
+                            </td>
+                          </tr>
+                          <?php $x++; ?>
+                        <?php endforeach; ?>
+                      <?php endif; ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
 
               <div class="col-md-6 col-xs-12 pull pull-right">
 
@@ -195,7 +199,7 @@ foreach ($query->result() as $row) {
                 <div class="form-group">
                   <label for="net_amount" class="col-sm-5 control-label">จำนวนเงินรวม สุทธิ</label>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control" id="net_amount" name="net_amount" disabled value="<?php echo $order_data['order']['net_amount'] ?>" autocomplete="off">
+                    <input type="text" class="form-control text-right" id="net_amount" name="net_amount" disabled value="<?php echo $order_data['order']['net_amount'] ?>" autocomplete="off">
                     <input type="hidden" class="form-control" id="net_amount_value" name="net_amount_value" value="<?php echo $order_data['order']['net_amount'] ?>" autocomplete="off">
                   </div>
                 </div>
@@ -214,14 +218,14 @@ foreach ($query->result() as $row) {
             </div>
             <!-- /.box-body -->
 
-            <div class="box-footer">
+            <div class="panel-footer">
 
               <input type="hidden" name="service_charge_rate" value="<?php echo $company_data['service_charge_value'] ?>" autocomplete="off">
               <input type="hidden" name="vat_charge_rate" value="<?php echo $company_data['vat_charge_value'] ?>" autocomplete="off">
 
-              <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> บันทึก</button>
-              <a target="__blank" href="<?php echo base_url() . 'orders/printDiv/' . $order_data['order']['id'] ?>" class="btn btn-success"> <i class="fa fa-print"></i> พิมพ์</a>
-              <a href="<?php echo base_url('orders/') ?>" class="btn btn-warning"> <i class="fa fa-mail-reply"></i> ย้อนกลับ</a>
+              <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> บันทึก</button>
+              <a target="__blank" href="<?php echo base_url() . 'orders/printDiv/' . $order_data['order']['id'] ?>" class="btn btn-primary"> <i class="fa fa-print"></i> พิมพ์</a>
+              <!-- <a href="<?php echo base_url('orders/') ?>" class="btn btn-warning"> <i class="fa fa-mail-reply"></i> ย้อนกลับ</a> -->
             </div>
           </form>
           <!-- /.box-body -->
@@ -288,19 +292,19 @@ foreach ($query->result() as $row) {
 
           // console.log(reponse.x);
           var html = '<tr id="row_' + row_id + '">' +
+            '<td><button type="button" class="btn btn-default" onclick="removeRow(\'' + row_id + '\')"><i class="fa fa-close"></i></button></td>' +
             '<td>' +
             '<select class="form-control select_group product" data-row-id="' + row_id + '" id="product_' + row_id + '" name="product[]" style="width:100%;" onchange="getProductData(' + row_id + ')">' +
             '<option value=""></option>';
           $.each(response, function(index, value) {
-            html += '<option value="' + value.id + '">' + value.name + " (คงเหลือ " + value.qty + ")" + '</option>';
+            html += '<option value="' + value.id + '">' + value.name + " (คงเหลือ " + value.qty + " " + value.unit + ")" + '</option>';
           });
 
           html += '</select>' +
             '</td>' +
-            '<td><input type="number" name="qty[]" id="qty_' + row_id + '" class="form-control" onkeyup="getTotal(' + row_id + ')"></td>' +
-            '<td><input type="text" name="rate[]" id="rate_' + row_id + '" class="form-control" disabled><input type="hidden" name="rate_value[]" id="rate_value_' + row_id + '" class="form-control"></td>' +
-            '<td><input type="text" name="amount[]" id="amount_' + row_id + '" class="form-control" disabled><input type="hidden" name="amount_value[]" id="amount_value_' + row_id + '" class="form-control"></td>' +
-            '<td><button type="button" class="btn btn-default" onclick="removeRow(\'' + row_id + '\')"><i class="fa fa-close"></i></button></td>' +
+            '<td><input type="text" name="qty[]" id="qty_' + row_id + '" class="form-control text-right" onkeyup="getTotal(' + row_id + ')"></td>' +
+            '<td><input type="text" name="rate[]" id="rate_' + row_id + '" class="form-control text-right" disabled><input type="hidden" name="rate_value[]" id="rate_value_' + row_id + '" class="form-control"></td>' +
+            '<td><input type="text" name="amount[]" id="amount_' + row_id + '" class="form-control text-right" disabled><input type="hidden" name="amount_value[]" id="amount_value_' + row_id + '" class="form-control"></td>' +
             '</tr>';
 
           if (count_table_tbody_tr >= 1) {

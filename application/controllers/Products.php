@@ -60,12 +60,20 @@ class Products extends Admin_Controller
             $availability = ($value['availability'] == 1) ? '<span class="label label-success">ใช้งาน</span>' : '<span class="label label-danger">ไม่ใช้งาน</span>';
 
             // โชว์จำนวน Stock ในคลัง
+            // $qty_status = '';
+            // if($value['qty'] <= 0) {
+            //     $qty_status = ' <span class="label label-danger"> หมด</span>';
+            // } else if($value['qty'] <= 5) {
+            //     $qty_status = ' <span class="label label-warning"> เหลือน้อย</span>';
+            // } else if($value['qty'] > 5) {
+            //     $qty_status = ' <span class="label label-success"> พร้อมเบิก</span>';
+            // }
             $qty_status = '';
             if($value['qty'] <= 0) {
                 $qty_status = ' <span class="label label-danger"> หมด</span>';
-            } else if($value['qty'] <= 5) {
+            } else if($value['qty'] <= $value['minimum']) {
                 $qty_status = ' <span class="label label-warning"> เหลือน้อย</span>';
-            } else if($value['qty'] > 5) {
+            } else if($value['qty'] > $value['minimum']) {
                 $qty_status = ' <span class="label label-success"> พร้อมเบิก</span>';
             }
 
@@ -77,6 +85,7 @@ class Products extends Admin_Controller
 				$value['price'],
                 $value['qty'] . '  ' . $qty_status,
                 $value['unit'],
+                $value['minimum'],
                 $store_data['name'],
 				$availability,
 				$buttons
@@ -101,6 +110,8 @@ class Products extends Admin_Controller
 		$this->form_validation->set_rules('sku', 'SKU', 'trim|required');
 		$this->form_validation->set_rules('price', 'Price', 'trim|required');
 		$this->form_validation->set_rules('qty', 'Qty', 'trim|required');
+		$this->form_validation->set_rules('unit', 'Unit', 'trim|required');
+		$this->form_validation->set_rules('minimum', 'Minimum', 'trim|required');
         $this->form_validation->set_rules('store', 'Store', 'trim|required');
 		$this->form_validation->set_rules('availability', 'Availability', 'trim|required');
 		
@@ -115,6 +126,7 @@ class Products extends Admin_Controller
         		'price' => $this->input->post('price'),
         		'qty' => $this->input->post('qty'),
         		'unit' => $this->input->post('unit'),
+        		'minimum' => $this->input->post('minimum'),
         		'image' => $upload_image,
         		'description' => $this->input->post('description'),
         		'attribute_value_id' => json_encode($this->input->post('attributes_value_id')),
@@ -210,6 +222,7 @@ class Products extends Admin_Controller
         $this->form_validation->set_rules('price', 'Price', 'trim|required');
         $this->form_validation->set_rules('qty', 'Qty', 'trim|required');
         $this->form_validation->set_rules('unit', 'Unit', 'trim|required');
+        $this->form_validation->set_rules('minimum', 'Minimum', 'trim|required');
         $this->form_validation->set_rules('store', 'Store', 'trim|required');
         $this->form_validation->set_rules('availability', 'Availability', 'trim|required');
 
@@ -222,6 +235,7 @@ class Products extends Admin_Controller
                 'price' => $this->input->post('price'),
                 'qty' => $this->input->post('qty'),
                 'unit' => $this->input->post('unit'),
+                'minimum' => $this->input->post('minimum'),
                 'description' => $this->input->post('description'),
                 'attribute_value_id' => json_encode($this->input->post('attributes_value_id')),
                 'brand_id' => json_encode($this->input->post('brands')),

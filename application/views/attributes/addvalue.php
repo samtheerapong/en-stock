@@ -1,5 +1,3 @@
-
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -18,61 +16,64 @@
   <!-- Main content -->
   <section class="content">
     <!-- Small boxes (Stat box) -->
-    <div class="row">
-      <div class="col-md-12 col-xs-12">
-
-        <div class="box">
-          <div class="box-body">
-            <h4>พื้นที่จัดเก็บ: <?php echo $attribute_data['name']; ?></h4>
-          </div>
-        </div>
+    <div class="container-fluid">
+      <div class="row">
 
         <div id="messages"></div>
 
-        <?php if($this->session->flashdata('success')): ?>
+        <?php if ($this->session->flashdata('success')) : ?>
           <div class="alert alert-success alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <?php echo $this->session->flashdata('success'); ?>
           </div>
-        <?php elseif($this->session->flashdata('error')): ?>
+        <?php elseif ($this->session->flashdata('error')) : ?>
           <div class="alert alert-error alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <?php echo $this->session->flashdata('error'); ?>
           </div>
         <?php endif; ?>
 
-        <?php //if(in_array('createGroup', $user_permission)): ?>
-          <button class="btn btn-primary" data-toggle="modal" data-target="#addModal"><i class="fa fa-plus"></i> เพิ่มข้อมูล</button>
-          <br /> <br />
-        <?php //endif; ?>
+        <?php //if(in_array('createGroup', $user_permission)): 
+        ?>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#addModal"><i class="fa fa-plus"></i> เพิ่มข้อมูล</button>
+        <br /> <br />
+        <?php //endif; 
+        ?>
 
-
-        <div class="box">
-          <div class="box-header">
-            <h3 class="box-title">จัดการชั้นวาง</h3>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <h4>พื้นที่จัดเก็บ: <?php echo $attribute_data['name']; ?></h4>
           </div>
-          <!-- /.box-header -->
-          <div class="box-body">
+        </div>
+
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">จัดการชั้นวาง</h3>
+          </div>
+          <!-- /.panel-header -->
+          <div class="panel-body">
             <table id="manageTable" class="table table-bordered table-striped">
               <thead>
-              <tr>
-                <th>ชั้นวาง</th>
-                <?php //if(in_array('updateGroup', $user_permission) || in_array('deleteGroup', $user_permission)): ?>
+                <tr>
+                  <th>ชั้นวาง</th>
+                  <?php //if(in_array('updateGroup', $user_permission) || in_array('deleteGroup', $user_permission)): 
+                  ?>
                   <th>จัดการ</th>
-                <?php //endif; ?>
-              </tr>
+                  <?php //endif; 
+                  ?>
+                </tr>
               </thead>
 
             </table>
           </div>
-          <!-- /.box-body -->
+          <!-- /.panel-body -->
         </div>
-        <!-- /.box -->
+        <!-- /.panel -->
       </div>
       <!-- col-md-12 -->
     </div>
     <!-- /.row -->
-    
+
 
   </section>
   <!-- /.content -->
@@ -101,7 +102,7 @@
         <div class="modal-footer">
           <input type="hidden" name="attribute_parent_id" id="attribute_parent_id" value="<?php echo $attribute_data['id']; ?>">
           <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"> ปิด</i></button>
-          <button type="submit" class="btn btn-primary"><i class="fa fa-save"> บันทึก</i></button>
+          <button type="submit" class="btn btn-success"><i class="fa fa-save"> บันทึก</i></button>
         </div>
 
       </form>
@@ -134,7 +135,7 @@
         <div class="modal-footer">
           <input type="hidden" name="attribute_parent_id" id="attribute_parent_id" value="<?php echo $attribute_data['id']; ?>">
           <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i> ปิด</button>
-          <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> บันทึก</button>
+          <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> บันทึก</button>
         </div>
 
       </form>
@@ -171,160 +172,23 @@
 
 
 <script type="text/javascript">
-var manageTable;
-var base_url = "<?php echo base_url(); ?>";
+  var manageTable;
+  var base_url = "<?php echo base_url(); ?>";
 
-$(document).ready(function() {
-
-  
-
-  $("#attributeNav").addClass('active');
-
-  // initialize the datatable 
-  manageTable = $('#manageTable').DataTable({
-    'ajax': base_url+'attributes/fetchAttributeValueData/'+<?php echo $attribute_data['id']; ?>,
-    'order': []
-  });
-
-  // submit the create from 
-  $("#createForm").unbind('submit').on('submit', function() {
-    var form = $(this);
-
-    // remove the text-danger
-    $(".text-danger").remove();
-
-    $.ajax({
-      url: form.attr('action'),
-      type: form.attr('method'),
-      data: form.serialize(), // /converting the form data into array and sending it to server
-      dataType: 'json',
-      success:function(response) {
-
-        manageTable.ajax.reload(null, false); 
-
-        if(response.success === true) {
-          $("#messages").html('<div class="alert alert-success alert-dismissible" role="alert">'+
-            '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
-            '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>'+response.messages+
-          '</div>');
+  $(document).ready(function() {
 
 
-          // hide the modal
-          $("#addModal").modal('hide');
 
-          // reset the form
-          $("#createForm")[0].reset();
-          $("#createForm .form-group").removeClass('has-error').removeClass('has-success');
+    $("#attributeNav").addClass('active');
 
-        } else {
+    // initialize the datatable 
+    manageTable = $('#manageTable').DataTable({
+      'ajax': base_url + 'attributes/fetchAttributeValueData/' + <?php echo $attribute_data['id']; ?>,
+      'order': []
+    });
 
-          if(response.messages instanceof Object) {
-            $.each(response.messages, function(index, value) {
-              var id = $("#"+index);
-
-              id.closest('.form-group')
-              .removeClass('has-error')
-              .removeClass('has-success')
-              .addClass(value.length > 0 ? 'has-error' : 'has-success');
-              
-              id.after(value);
-
-            });
-          } else {
-            $("#messages").html('<div class="alert alert-warning alert-dismissible" role="alert">'+
-              '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
-              '<strong> <span class="glyphicon glyphicon-exclamation-sign"></span> </strong>'+response.messages+
-            '</div>');
-          }
-        }
-      }
-    }); 
-
-    return false;
-  });
-
-});
-
-// edit function
-// id => attribute value id
-function editFunc(id)
-{ 
-
-  $.ajax({
-    url: base_url+'attributes/fetchAttributeValueById/'+id,
-    type: 'post',
-    dataType: 'json',
-    success:function(response) {
-
-      console.log(response);
-
-      $("#edit_attribute_value_name").val(response.value);
-
-      // submit the edit from 
-      $("#updateForm").unbind('submit').bind('submit', function() {
-        var form = $(this);
-
-        // remove the text-danger
-        $(".text-danger").remove();
-
-        $.ajax({
-          url: form.attr('action') + '/' + id,
-          type: form.attr('method'),
-          data: form.serialize(), // /converting the form data into array and sending it to server
-          dataType: 'json',
-          success:function(response) {
-
-            manageTable.ajax.reload(null, false); 
-
-            if(response.success === true) {
-              $("#messages").html('<div class="alert alert-success alert-dismissible" role="alert">'+
-                '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
-                '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>'+response.messages+
-              '</div>');
-
-
-              // hide the modal
-              $("#editModal").modal('hide');
-              // reset the form 
-              $("#updateForm .form-group").removeClass('has-error').removeClass('has-success');
-
-            } else {
-
-              if(response.messages instanceof Object) {
-                $.each(response.messages, function(index, value) {
-                  var id = $("#"+index);
-
-                  id.closest('.form-group')
-                  .removeClass('has-error')
-                  .removeClass('has-success')
-                  .addClass(value.length > 0 ? 'has-error' : 'has-success');
-                  
-                  id.after(value);
-
-                });
-              } else {
-                $("#messages").html('<div class="alert alert-warning alert-dismissible" role="alert">'+
-                  '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
-                  '<strong> <span class="glyphicon glyphicon-exclamation-sign"></span> </strong>'+response.messages+
-                '</div>');
-              }
-            }
-          }
-        }); 
-
-        return false;
-      });
-
-    }
-  });
-}
-
-// remove functions 
-function removeFunc(id)
-{
-  if(id) {
-    $("#removeForm").on('submit', function() {
-
+    // submit the create from 
+    $("#createForm").unbind('submit').on('submit', function() {
       var form = $(this);
 
       // remove the text-danger
@@ -333,35 +197,170 @@ function removeFunc(id)
       $.ajax({
         url: form.attr('action'),
         type: form.attr('method'),
-        data: { attribute_value_id:id }, 
+        data: form.serialize(), // /converting the form data into array and sending it to server
         dataType: 'json',
-        success:function(response) {
+        success: function(response) {
 
-          manageTable.ajax.reload(null, false); 
+          manageTable.ajax.reload(null, false);
 
-          if(response.success === true) {
-            $("#messages").html('<div class="alert alert-success alert-dismissible" role="alert">'+
-              '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
-              '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>'+response.messages+
-            '</div>');
+          if (response.success === true) {
+            $("#messages").html('<div class="alert alert-success alert-dismissible" role="alert">' +
+              '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+              '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>' + response.messages +
+              '</div>');
+
 
             // hide the modal
-            $("#removeModal").modal('hide');
+            $("#addModal").modal('hide');
+
+            // reset the form
+            $("#createForm")[0].reset();
+            $("#createForm .form-group").removeClass('has-error').removeClass('has-success');
 
           } else {
 
-            $("#messages").html('<div class="alert alert-warning alert-dismissible" role="alert">'+
-              '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
-              '<strong> <span class="glyphicon glyphicon-exclamation-sign"></span> </strong>'+response.messages+
-            '</div>'); 
+            if (response.messages instanceof Object) {
+              $.each(response.messages, function(index, value) {
+                var id = $("#" + index);
+
+                id.closest('.form-group')
+                  .removeClass('has-error')
+                  .removeClass('has-success')
+                  .addClass(value.length > 0 ? 'has-error' : 'has-success');
+
+                id.after(value);
+
+              });
+            } else {
+              $("#messages").html('<div class="alert alert-warning alert-dismissible" role="alert">' +
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                '<strong> <span class="glyphicon glyphicon-exclamation-sign"></span> </strong>' + response.messages +
+                '</div>');
+            }
           }
         }
-      }); 
+      });
 
       return false;
     });
+
+  });
+
+  // edit function
+  // id => attribute value id
+  function editFunc(id) {
+
+    $.ajax({
+      url: base_url + 'attributes/fetchAttributeValueById/' + id,
+      type: 'post',
+      dataType: 'json',
+      success: function(response) {
+
+        console.log(response);
+
+        $("#edit_attribute_value_name").val(response.value);
+
+        // submit the edit from 
+        $("#updateForm").unbind('submit').bind('submit', function() {
+          var form = $(this);
+
+          // remove the text-danger
+          $(".text-danger").remove();
+
+          $.ajax({
+            url: form.attr('action') + '/' + id,
+            type: form.attr('method'),
+            data: form.serialize(), // /converting the form data into array and sending it to server
+            dataType: 'json',
+            success: function(response) {
+
+              manageTable.ajax.reload(null, false);
+
+              if (response.success === true) {
+                $("#messages").html('<div class="alert alert-success alert-dismissible" role="alert">' +
+                  '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                  '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>' + response.messages +
+                  '</div>');
+
+
+                // hide the modal
+                $("#editModal").modal('hide');
+                // reset the form 
+                $("#updateForm .form-group").removeClass('has-error').removeClass('has-success');
+
+              } else {
+
+                if (response.messages instanceof Object) {
+                  $.each(response.messages, function(index, value) {
+                    var id = $("#" + index);
+
+                    id.closest('.form-group')
+                      .removeClass('has-error')
+                      .removeClass('has-success')
+                      .addClass(value.length > 0 ? 'has-error' : 'has-success');
+
+                    id.after(value);
+
+                  });
+                } else {
+                  $("#messages").html('<div class="alert alert-warning alert-dismissible" role="alert">' +
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                    '<strong> <span class="glyphicon glyphicon-exclamation-sign"></span> </strong>' + response.messages +
+                    '</div>');
+                }
+              }
+            }
+          });
+
+          return false;
+        });
+
+      }
+    });
   }
-}
 
+  // remove functions 
+  function removeFunc(id) {
+    if (id) {
+      $("#removeForm").on('submit', function() {
 
+        var form = $(this);
+
+        // remove the text-danger
+        $(".text-danger").remove();
+
+        $.ajax({
+          url: form.attr('action'),
+          type: form.attr('method'),
+          data: {
+            attribute_value_id: id
+          },
+          dataType: 'json',
+          success: function(response) {
+
+            manageTable.ajax.reload(null, false);
+
+            if (response.success === true) {
+              $("#messages").html('<div class="alert alert-success alert-dismissible" role="alert">' +
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>' + response.messages +
+                '</div>');
+
+              // hide the modal
+              $("#removeModal").modal('hide');
+
+            } else {
+
+              $("#messages").html('<div class="alert alert-warning alert-dismissible" role="alert">' +
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                '<strong> <span class="glyphicon glyphicon-exclamation-sign"></span> </strong>' + response.messages +
+                '</div>');
+            }
+          }
+        });
+
+        return false;
+      });
+    }
+  }
 </script>
