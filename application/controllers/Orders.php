@@ -74,7 +74,7 @@ class Orders extends Admin_Controller
 				$value['bill_no'],
 				$value['customer_name'],
 				$value['customer_address'],
-				// $value['customer_phone'],
+				$value['customer_phone'],
 				$date_time,
 				$count_total_item,
 				$value['net_amount'],
