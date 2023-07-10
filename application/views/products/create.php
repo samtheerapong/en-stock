@@ -80,6 +80,10 @@
                 <label for="qty">ขั้นต่ำ</label>
                 <input type="text" class="form-control" id="minimum" name="minimum" placeholder="" autocomplete="off" />
               </div>
+              <div class="form-group">
+                <label for="qty">หน่วย</label>
+                <input type="text" class="form-control" id="unit" name="unit" placeholder="Enter Unit" autocomplete="off" />
+              </div>
 
               <div class="form-group">
                 <label for="description">รายละเอียด</label>
