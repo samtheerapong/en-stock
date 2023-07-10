@@ -179,7 +179,7 @@ class Products extends Admin_Controller
     	// assets/images/product_image
         $config['upload_path'] = 'assets/images/product_image';
         $config['file_name'] =  uniqid();
-        $config['allowed_types'] = 'gif|jpg|png';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
         $config['max_size'] = '10000';
 
         // $config['max_width']  = '1024';s
