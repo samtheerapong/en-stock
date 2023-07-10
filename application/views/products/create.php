@@ -58,27 +58,27 @@
 
               <div class="form-group">
                 <label for="product_name">รายการอะไหล่</label>
-                <input type="text" class="form-control" id="product_name" name="product_name" placeholder="" autocomplete="off" required/>
+                <input type="text" class="form-control" id="product_name" name="product_name" placeholder="ชื่ออะไหล่" autocomplete="off" required/>
               </div>
 
               <div class="form-group">
                 <label for="sku">รหัส</label>
-                <input type="text" class="form-control" id="sku" name="sku" placeholder="" autocomplete="off" required/>
+                <input type="text" class="form-control" id="sku" name="sku" placeholder="ใส่รหัสบาร์โค้ด" autocomplete="off" required/>
               </div>
 
               <div class="form-group">
                 <label for="price">ราคา</label>
-                <input type="text" class="form-control" id="price" name="price" placeholder="" autocomplete="off" required/>
+                <input type="text" class="form-control" id="price" name="price" placeholder="ใส่เฉพาะตัวเลข" autocomplete="off" required/>
               </div>
 
               <div class="form-group">
                 <label for="qty">จำนวน</label>
-                <input type="text" class="form-control" id="qty" name="qty" placeholder="" autocomplete="off" required/>
+                <input type="text" class="form-control" id="qty" name="qty" placeholder="ใส่เฉพาะตัวเลข" autocomplete="off" required/>
               </div>
 
               <div class="form-group">
                 <label for="qty">ขั้นต่ำ</label>
-                <input type="text" class="form-control" id="minimum" name="minimum" placeholder="" autocomplete="off" required/>
+                <input type="text" class="form-control" id="minimum" name="minimum" placeholder="ใส่เฉพาะตัวเลข" autocomplete="off" required/>
               </div>
               <div class="form-group">
                 <label for="qty">หน่วย</label>
