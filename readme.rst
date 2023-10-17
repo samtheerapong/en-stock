@@ -1,4 +1,12 @@
 ######################
+Changelog V1.0.2 build 20231017
+######################
+- ผู้เบิก พิมพ์ชื่อได้เลย จากเดิมต้องเลือกจากฐานข้อมูล
+- วันที่เบิก สามารถเลือกจากปฏิทินได้เลย จากเดิมใช้วันที่ปัจจุบัน
+- ในหน้าตารางเบิก และ Create/Update ปรับการแสดงผลในรูปแบบ วัน/เดือน/ปี (ค.ศ.)
+
+
+######################
 Changelog V1.0.2
 ######################
 - New หน่วย (add unit in database products table)
@@ -17,7 +25,7 @@ Changelog V1.0.1
 - New ค้นหาจาก รหัส barcode (รองรับ Application สแกน Barcode)
 - Update ผู้เบิก ดึงรายชื่อจาก ตาราง user (firstname.lastname) (dropdownList)
 - Update ประเภทการเบิก เลือก งานซ่อม/โครงการ (dropdownList)
-- Update วัตถุประสงค์ (text)
+- Update วัตถุประสงค์ (text) / เพิ่มฐานข้อมูลด้วย
 - Update สถานะ รอตรวจสอบ/อนุมัติ (dropdownList)
 
 
@@ -31,13 +39,9 @@ Changelog V1.0.0
 Demo Version 
 ######################
 User: admin@admin.com
-Password: password
-
 User: engineer@nfc.com
-Password: engineer
-
 User: all
-password: 12345678
+
 
 #ENV
 php = Version 7.4
