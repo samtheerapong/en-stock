@@ -88,10 +88,11 @@ foreach ($query->result() as $row) {
                 <div class="form-group">
                   <label for="gross_amount" class="col-sm-3 control-label" style="text-align:left;">ผู้เบิก</label>
                   <div class="col-sm-7">
-                    <select id="customer_name" name="customer_name" class="form-control" required>
+                  <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="" autocomplete="off" required>
+                    <!-- <select id="customer_name" name="customer_name" class="form-control" required>
                       <option value=''></option>
                       <?= $options ?>
-                    </select>
+                    </select> -->
                   </div>
                 </div>
 
@@ -111,6 +112,15 @@ foreach ($query->result() as $row) {
                     <input type="text" class="form-control" id="customer_phone" name="customer_phone" placeholder="" autocomplete="off">
                   </div>
                 </div>
+
+                <div class="form-group">
+                  <label for="gross_amount" class="col-sm-3 control-label" style="text-align:left;">วันที่เบิก</label>
+                  <div class="col-sm-7">
+                    <input type="date" class="form-control" id="date_time" name="date_time" placeholder="" autocomplete="off" required>
+                  </div>
+                </div>
+
+
               </div>
 
               <div class="col-md-12 col-xs-12">
