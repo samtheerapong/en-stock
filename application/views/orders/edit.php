@@ -76,11 +76,15 @@ foreach ($query->result() as $row) {
                 <div class="form-group">
                   <label for="gross_amount" class="col-sm-3 control-label" style="text-align:left;">ผู้เบิก</label>
                   <div class="col-sm-7">
-                    <!-- <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="" value="<?php echo $order_data['order']['customer_name'] ?>" autocomplete="off"/> -->
-                    <select id="customer_name" name="customer_name" class="form-control" required>
+                    <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="" value="<?php echo $order_data['order']['customer_name'] ?>" autocomplete="off" />
+
+
+                    <!-- <select id="customer_name" name="customer_name" class="form-control" required>
                       <option value='<?php echo $order_data['order']['customer_name'] ?>'># <?php echo $order_data['order']['customer_name'] ?></option>
                       <?= $options ?>
-                    </select>
+                    </select> -->
+
+
                   </div>
                 </div>
 
@@ -105,9 +109,18 @@ foreach ($query->result() as $row) {
                 <div class="form-group">
                   <label for="gross_amount" class="col-sm-3 control-label" style="text-align:left;">วัตถุประสงค์</label>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control" id="customer_phone" name="customer_phone" placeholder="" value="<?php echo $order_data['order']['customer_phone'] ?>" autocomplete="off">
+                    <input type="text" class="form-control" id="customer_phone" name="customer_phone" value="<?php echo $order_data['order']['customer_phone'] ?>" autocomplete="off">
                   </div>
                 </div>
+
+                <div class="form-group">
+                  <label for="date_time" class="col-sm-3 control-label" style="text-align: left;">วันที่เบิก</label>
+                  <div class="col-sm-7">
+                    <input type="date" class="form-control" id="date_time" name="date_time" value="<?= $order_data['order']['date_time'] ?>" required>
+                  </div>
+                </div>
+
+
               </div>
 
               <div class="col-md-12 col-xs-12">
@@ -297,7 +310,7 @@ foreach ($query->result() as $row) {
             '<select class="form-control select_group product" data-row-id="' + row_id + '" id="product_' + row_id + '" name="product[]" style="width:100%;" onchange="getProductData(' + row_id + ')">' +
             '<option value=""></option>';
           $.each(response, function(index, value) {
-            html += '<option value="' + value.id + '">'+ value.sku + " " + value.name + " (คงเหลือ " + value.qty + " " + value.unit + ")" + '</option>';
+            html += '<option value="' + value.id + '">' + value.sku + " " + value.name + " (คงเหลือ " + value.qty + " " + value.unit + ")" + '</option>';
           });
 
           html += '</select>' +

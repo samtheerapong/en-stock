@@ -44,10 +44,12 @@ class Orders extends Admin_Controller
 
 			$count_total_item = $this->model_orders->countOrderItem($value['id']); //รายการเบิก
 			// $count_total_items = $this->model_orders->countOrderItem($value['id']);
-			$date = date('Y-m-d', $value['date_time']);
-			$time = date('H:i', $value['date_time']);
+			// $date = date('Y-m-d', $value['date_time']);
+			$date = date('d/m/Y', $value['date_time']);
+			// $time = date('H:i', $value['date_time']);
 
-			$date_time = $date . ' เวลา ' . $time . ' น. ';
+			// $date_time = $date . ' เวลา ' . $time . ' น. ';
+			$date_time = $date;
 
 			// button
 			$buttons = '';
