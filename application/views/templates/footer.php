@@ -1,7 +1,7 @@
 
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 1.0.2
+      <b>Version</b> 1.0.3
     </div>
     <strong>Copyright &copy; 2022-<?php echo date('Y') ?>.</strong> All rights reserved. Dev By Theerapong Khanta
   </footer>
