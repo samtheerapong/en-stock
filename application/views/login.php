@@ -54,11 +54,12 @@
 
     <form action="<?php echo base_url('auth/login') ?>" method="post">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" name="email" id="email" placeholder="อีเมล" autocomplete="off">
+        <!-- <input type="email" class="form-control" name="email" id="email" placeholder="อีเมล" autocomplete="off"> -->
+        <input type="username" class="form-control" name="username" id="username" placeholder="Username" autocomplete="off">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" name="password" id="password" placeholder="รหัสผ่าน" autocomplete="off">
+        <input type="password" class="form-control" name="password" id="password" placeholder="Password" autocomplete="off">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
