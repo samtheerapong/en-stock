@@ -36,6 +36,8 @@ class Auth extends Admin_Controller
            			$logged_in_sess = array(
            				'id' => $login['id'],
 				        'username'  => $login['username'],
+				        'firstname'  => $login['firstname'],
+				        'lastname'  => $login['lastname'],
 				        'email'     => $login['email'],
 				        'logged_in' => TRUE
 					);
