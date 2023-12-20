@@ -1,9 +1,9 @@
 ######################
-Changelog V1.0.23 build 20231220
+Changelog V1.0.3 build 20231220
 ######################
 - ผู้เบิก เลือกชื่อจากผู้ใช้ที่ Liogin
 - Dashboard กำหนดให้ ผู้ใช้งานแสดง อะไหล่ และ รายการเบิก
-- Login ใช้ Username แทน mail ในการ Login
+- Login ใช้ Username แทน email ในการ Login
 
 ######################
 Changelog V1.0.2 build 20231017
