@@ -24,9 +24,9 @@ class Products extends Admin_Controller
     */
 	public function index()
 	{
-        if(!in_array('viewProduct', $this->permission)) {
-            redirect('dashboard', 'refresh');
-        }
+        // if(!in_array('viewProduct', $this->permission)) {
+        //     redirect('dashboard', 'refresh');
+        // }
 
 		$this->render_template('products/index', $this->data);	
 	}

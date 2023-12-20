@@ -36,10 +36,14 @@ class Model_orders extends CI_Model
 	public function create()
 	{
 		$user_id = $this->session->userdata('id');
+		// $user_firstname = $this->session->userdata('firstname');
+		// $user_lastname = $this->session->userdata('lastname');
+
 		$bill_no = 'EN-'.strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 5)); //กำหนดรหัสใบเบิกอัตโนมัติ
     	$data = array(
     		'bill_no' => $bill_no,
     		'customer_name' => $this->input->post('customer_name'),
+    		// 'customer_name' => $user_firstname .' ' .$user_lastname,
     		'customer_address' => $this->input->post('customer_address'),
     		'customer_phone' => $this->input->post('customer_phone'),
     		// 'date_time' => strtotime(date('Y-m-d H:i:s')),

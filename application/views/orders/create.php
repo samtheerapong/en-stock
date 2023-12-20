@@ -14,6 +14,10 @@ foreach ($query->result() as $row) {
 
   $options .= "<option value='" . $pickername . "'>" . $pickername . "</option>";
 }
+
+$user_firstname = $this->session->userdata('firstname');
+$user_lastname = $this->session->userdata('lastname');
+
 ?>
 <!-- <style>
   @media (max-width: auto) {
@@ -88,11 +92,12 @@ foreach ($query->result() as $row) {
                 <div class="form-group">
                   <label for="gross_amount" class="col-sm-3 control-label" style="text-align:left;">ผู้เบิก</label>
                   <div class="col-sm-7">
-                  <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="" autocomplete="off" required>
-                    <!-- <select id="customer_name" name="customer_name" class="form-control" required>
+                    <!-- <input type="text" class="form-control" id="customer_name" name="customer_name" value="<?php echo $username; ?>"> -->
+
+                    <select id="customer_name" name="customer_name" class="form-control" required>
                       <option value=''></option>
                       <?= $options ?>
-                    </select> -->
+                    </select>
                   </div>
                 </div>
 
