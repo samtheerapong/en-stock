@@ -86,7 +86,7 @@
     <div class="row">
         <div class="col-md-12 mt-3">
             <p><b>Changelog V1.0.3 build 20231220</b></p>
-            <p>- Update ผู้เบิก ดึงชื่อจากผู้ใช้ที่ Login (ชื่อ สกุล)</p>
+            <!-- <p>- Update ผู้เบิก ดึงชื่อจากผู้ใช้ที่ Login (ชื่อ สกุล)</p> -->
             <p>- Update Dashboard กำหนดให้ ผู้ใช้งานแสดง อะไหล่ และ รายการเบิก</p>
             <p>- Update Login ใช้ Username แทน email ในการ Login</p>
         </div>
