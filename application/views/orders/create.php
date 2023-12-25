@@ -92,7 +92,10 @@ $user_lastname = $this->session->userdata('lastname');
                 <div class="form-group">
                   <label for="gross_amount" class="col-sm-3 control-label" style="text-align:left;">ผู้เบิก</label>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control" id="customer_name" name="customer_name" value="<?= $user_firstname . ' ' . $user_lastname; ?>">
+                  <select id="customer_name" name="customer_name" class="form-control" required>
+                      <option value=''></option>
+                      <?= $options ?>
+                    </select>
 
                   </div>
                 </div>
