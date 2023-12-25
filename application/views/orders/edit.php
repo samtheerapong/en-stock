@@ -114,9 +114,13 @@ foreach ($query->result() as $row) {
                 </div>
 
                 <div class="form-group">
-                  <label for="date_time" class="col-sm-3 control-label" style="text-align: left;">วันที่เบิก</label>
+                  <label for="date_time" class="col-sm-3 control-label" style="text-align: left;">วันที่เบิก:
+                  </label>
+
+
                   <div class="col-sm-7">
-                    <input type="date" class="form-control" id="date_time" name="date_time" value="<?= $order_data['order']['date_time'] ?>" required>
+                    <!-- <label for="date_time" class="form-control"><?php echo date('d/m/Y', $order_data['order']['date_time']); ?></label> -->
+                    <input type="date" class="form-control" id="date_time" name="date_time" value="<?= date('Y-m-d', $order_data['order']['date_time']) ?>" required>
                   </div>
                 </div>
 
